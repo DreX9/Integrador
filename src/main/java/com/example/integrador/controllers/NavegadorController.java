@@ -6,10 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping
+
 public class NavegadorController {
+
     @GetMapping
     public String inicio () {
-        return "inicio";
+        return "index";
     }
 
     @GetMapping("/compras")
