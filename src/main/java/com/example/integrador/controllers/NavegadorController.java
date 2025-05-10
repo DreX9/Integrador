@@ -19,4 +19,54 @@ public class NavegadorController {
         return "compras";
     }
 
+    @GetMapping("/ventas")
+    public String ventas () {
+        return "ventas";
+    }
+
+    @GetMapping("/productos")
+    public String productos () {
+        return "productos";
+    }
+
+    @GetMapping("/clasificaciones")
+    public String clasificaciones () {
+        return "clasificaciones";
+    }
+
+    @GetMapping("/almacenes")
+    public String almacenes () {
+        return "almacenes";
+    }
+
+    @GetMapping("/proveedores")
+    public String proveedores () {
+        return "proveedores";
+    }
+
+    @GetMapping("/clientes")
+    public String clientes () {
+        return "clientes";
+    }
+
+    @GetMapping("/empleados")
+    public String empleados () {
+        return "empleados";
+    }
+
+    @GetMapping("/devolucion-compra")
+    public String devolucionCompra () {
+        return "devolucion-compra";
+    }
+
+    @GetMapping("/devolucion-venta")
+    public String devolucionVenta () {
+        return "devolucion-venta";
+    }
+
+    @GetMapping("/reportes")
+    public String reportes () {
+        return "reportes";
+    }
+
 }
