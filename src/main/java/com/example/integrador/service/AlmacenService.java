@@ -20,8 +20,8 @@ public class AlmacenService implements IalmcenService{
     }
     @Override
     public Optional<Almacen> listarId(int id) {
-        // TODO Auto-generated method stub
-        return Optional.empty();
+        
+        return data.findById(id);
     }
     @Override
     public int Save(Almacen a) {
@@ -34,7 +34,7 @@ public class AlmacenService implements IalmcenService{
     }
     @Override
     public void delete(int id) {
-        // TODO Auto-generated method stub
+        data.deleteById(id);
         
     }
 
