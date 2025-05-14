@@ -63,6 +63,7 @@ public class NavegadorController {
     public String devolucionVenta () {
         return "devolucion-venta";
     }
+    
     @GetMapping("/inventarios")
     public String inventarios () {
         return "inventarios";
