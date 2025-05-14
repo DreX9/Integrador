@@ -34,8 +34,7 @@ public class AlmacenService implements IalmcenService{
     }
     @Override
     public void delete(int id) {
-        data.deleteById(id);
-        
+        data.deleteById(id);        
     }
 
 }

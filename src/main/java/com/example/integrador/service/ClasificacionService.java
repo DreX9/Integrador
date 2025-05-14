@@ -37,7 +37,7 @@ public class ClasificacionService implements IclasificacionService{
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        data.deleteById(id);   
     }
     
 }

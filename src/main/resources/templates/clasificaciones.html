@@ -24,6 +24,7 @@
                     </header>
                     <div class="card-body">
                         <form id="clasificacionesForm" th:object="${clasificacion}" th:action="@{/saveClasificacion}" method="post">
+                            <input type="hidden" th:field="*{id_clasificacion}" />
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="nombreClasificacion" class="form-label">Nombre</label>
@@ -63,7 +64,7 @@
                                         <th>ID</th>
                                         <th>Nombre Clasificación</th>
                                         <th>Tipo de Presentación</th>
-                                        <th>Tipo de lasificación</th>
+                                        <th>Tipo de Clasificación</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -74,8 +75,8 @@
                                         <td th:text="${clasificacion.tipo_presentacion}"></td>
                                         <td th:text="${clasificacion.tipo_clasificacion}"></td>
                                         <td>
-                                            <a th:href="@{'/clasificaciones/editar/' + ${clasificacion.id_clasificacion}}" class="btn btn-warning">Editar</a>
-                                            <a class="btn btn-danger">Eliminar</a>
+                                            <a th:href="@{/editarClasificaciones/} + ${clasificacion.id_clasificacion}" class="btn btn-warning">Editar</a>
+                                            <a th:href="@{/deleteClasificaciones/} + ${clasificacion.id_clasificacion}"class="btn btn-danger">Eliminar</a>
                                         </td>
                                         
                                     </tr>
