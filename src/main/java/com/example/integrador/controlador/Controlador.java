@@ -112,4 +112,10 @@ public class Controlador {
         model.addAttribute("almacen", almacen.get());
         return "almacenes";
     }
+
+    @GetMapping("/eliminar/{id_almacen}")
+    public String delete(@PathVariable int id_almacen, Model model){
+        service.delete(id_almacen);
+       return "redirect:/almacenes"; 
+    }
 }

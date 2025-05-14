@@ -34,7 +34,7 @@ public class AlmacenService implements IalmcenService{
     }
     @Override
     public void delete(int id) {
-        // TODO Auto-generated method stub
+        data.deleteById(id);
         
     }
 
