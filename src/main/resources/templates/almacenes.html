@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -60,14 +59,22 @@
                             <table class="table table-striped table-hover" id="almacenesTable">
                                 <thead class="table-dark">
                                     <tr>
-                                        <th>Nombre Almacén</th>
-                                        <th>Dirección</th>
-                                        <th>Descripción</th>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Direccion</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Los datos se cargarán dinámicamente -->
+                                   <tr th:each="almacen:${almacenes}">
+                                        <td th:text = "${almacen.id}"></td>
+                                        <td th:text = "${almacen.nombre}"></td>
+                                        <td th:text = "${almacen.descripcion}"></td>
+                                        <td>
+                                            <a class="btn btn-warning">Editar</a>
+                                            <a class="btn btn-danger">Eliminar</a>
+                                        </td>
+                                    </tr> 
                                 </tbody>
                             </table>
                         </div>
