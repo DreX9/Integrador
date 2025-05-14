@@ -24,6 +24,7 @@
                     </header>
                     <div class="card-body">
                         <form id="almacenesForm" th:action="@{/save}" th:object="${almacen}" method="POST">
+                            <input type="hidden" th:field="*{id_almacen}" />
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="nombreAlmacen" class="form-label">Nombre</label>
@@ -75,7 +76,7 @@
                                         <td th:text = "${almacen.direccion}"></td>
                                         <td th:text = "${almacen.descripcion}"></td>
                                         <td>
-                                            <a class="btn btn-warning">Editar</a>
+                                            <a th:href="@{/editar/}+${almacen.id_almacen}" class="btn btn-warning">Editar</a>
                                             <a class="btn btn-danger">Eliminar</a>
                                         </td>
                                     </tr> 
