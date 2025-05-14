@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -23,30 +23,31 @@
                         <h5 class="mb-0">Sistema de Clasificaciones</h5>
                     </header>
                     <div class="card-body">
-                        <form id="clasificacionesForm" action="#" method="post">
+                        <form id="clasificacionesForm" th:object="${clasificacion}" th:action="@{/saveClasificacion}" method="post">
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="nombreClasificacion" class="form-label">Nombre</label>
                                     <input type="text" class="form-control" id="nombreClasificacion"
-                                        name="nombreClasificacion">
+                                        name="nombreClasificacion" th:field="*{nombre_clasificacion}" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="tipoPresentacion" class="form-label">Tipo de Presentación</label>
                                     <input type="text" class="form-control" id="tipoPresentacion"
-                                        name="tipoPresentacion">
+                                        name="tipoPresentacion" th:field="*{tipo_presentacion}" required>
                                 </div>
                             </div>
-
                             <div class="row mb-3">
-                                <div class="col-md-12">
-                                    <label for="descripcionClasificacion" class="form-label">Descripción</label>
-                                    <textarea class="form-control" id="descripcionClasificacion" name="descripcionClasificacion" rows="4" style="resize: none;"></textarea>
+                                <div class="col-md-6">
+                                    <label for="tipoClasificacion" class="form-label">Tipo de Clasificacion</label>
+                                    <input type="text" class="form-control" id="tipoClasificacion"
+                                        name="tipoClasificacion" th:field="*{tipo_clasificacion}" required>
                                 </div>
+                                
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-12 d-flex justify-content-end">
-                                    <button type="button" class="btn btn-primary" id="btnCrear">Crear</button>
+                                    <button type="submit" class="btn btn-primary" id="btnCrear">Crear</button>
                                 </div>
                             </div>
                         </form>
@@ -59,13 +60,25 @@
                             <table class="table table-striped table-hover" id="clasificacionesTable">
                                 <thead class="table-dark">
                                     <tr>
+                                        <th>ID</th>
                                         <th>Nombre Clasificación</th>
-                                        <th>Tipo de presentación</th>
-                                        <th>Descripción</th>
+                                        <th>Tipo de Presentación</th>
+                                        <th>Tipo de lasificación</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Los datos se cargarán dinámicamente -->
+                                    <tr th:each="clasificacion:${clasificaciones}">
+                                        <td th:text="${clasificacion.id_clasificacion}"></td>
+                                        <td th:text="${clasificacion.nombre_clasificacion}"></td>
+                                        <td th:text="${clasificacion.tipo_presentacion}"></td>
+                                        <td th:text="${clasificacion.tipo_clasificacion}"></td>
+                                        <td>
+                                            <a th:href="@{'/clasificaciones/editar/' + ${clasificacion.id_clasificacion}}" class="btn btn-warning">Editar</a>
+                                            <a class="btn btn-danger">Eliminar</a>
+                                        </td>
+                                        
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

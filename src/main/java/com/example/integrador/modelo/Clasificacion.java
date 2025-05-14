@@ -13,14 +13,17 @@ public class Clasificacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_clasificacion;
     private String nombre_clasificacion;
+    private String tipo_presentacion;
     private String tipo_clasificacion;
 
     public Clasificacion (){
     }
 
-    public Clasificacion(int id_clasificacion, String nombre_clasificacion, String tipo_clasificacion) {
+    public Clasificacion(int id_clasificacion, String nombre_clasificacion, String tipo_presentacion,
+            String tipo_clasificacion) {
         this.id_clasificacion = id_clasificacion;
         this.nombre_clasificacion = nombre_clasificacion;
+        this.tipo_presentacion = tipo_presentacion;
         this.tipo_clasificacion = tipo_clasificacion;
     }
 
@@ -40,6 +43,14 @@ public class Clasificacion {
         this.nombre_clasificacion = nombre_clasificacion;
     }
 
+    public String getTipo_presentacion() {
+        return tipo_presentacion;
+    }
+
+    public void setTipo_presentacion(String tipo_presentacion) {
+        this.tipo_presentacion = tipo_presentacion;
+    }
+
     public String getTipo_clasificacion() {
         return tipo_clasificacion;
     }
@@ -47,6 +58,10 @@ public class Clasificacion {
     public void setTipo_clasificacion(String tipo_clasificacion) {
         this.tipo_clasificacion = tipo_clasificacion;
     }
+
+    
+
+
 
     
 }
