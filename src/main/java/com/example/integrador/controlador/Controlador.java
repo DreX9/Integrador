@@ -6,23 +6,19 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.integrador.interfacesService.IalmcenService;
 import com.example.integrador.interfacesService.IclasificacionService;
-import com.example.integrador.interfacesService.IusuarioService;
+import com.example.integrador.interfacesService.IproveedorService;
 import com.example.integrador.modelo.Almacen;
 import com.example.integrador.modelo.Clasificacion;
-import com.example.integrador.modelo.Usuario;
+import com.example.integrador.modelo.Proveedor;
 
 import jakarta.validation.Valid;
-
-
 
 @Controller
 @RequestMapping
@@ -32,8 +28,8 @@ public class Controlador {
     private IalmcenService service;
     @Autowired
     private IclasificacionService clasService;
-    @Autowired
-    private IusuarioService usuaService;
+     @Autowired
+    private IproveedorService provService;
 
     // @GetMapping
     // public String inicio () {
@@ -70,6 +66,13 @@ public class Controlador {
         model.addAttribute("almacen", new Almacen());
         return "almacenes";
     }
+    @GetMapping("/proveedores")
+    public String listarProveedores(Model model) {
+        List<Proveedor> proveedores = provService.listar();
+        model.addAttribute("proveedores", proveedores);
+        model.addAttribute("proveedor", new Proveedor());
+        return "proveedores";
+    }
 
     // @GetMapping("/proveedores")
     // public String proveedores () {
@@ -81,13 +84,10 @@ public class Controlador {
     // return "clientes";
     // }
 
-    @GetMapping("/usuarios")
-    public String usuarios (Model model) {
-        List<Usuario>usuarios = usuaService.listar();
-        model.addAttribute("usuarios", usuarios);
-        model.addAttribute("usuario", new Usuario());
-        return "usuarios";
-    }
+    // @GetMapping("/empleados")
+    // public String empleados () {
+    // return "empleados";
+    // }
 
     // @GetMapping("/devolucion-compra")
     // public String devolucionCompra () {
@@ -120,20 +120,10 @@ public class Controlador {
         clasService.save(c);
         return "redirect:/clasificaciones";
     }
-
-    @PostMapping("/saveUsuario")
-    public String saveUsuario(@Valid Usuario u, Model model) {
-        usuaService.save(u);
-        return "redirect:/usuarios";
-    }
-
-    @GetMapping("/editar/{id_almacen}")
-    public String editar(@PathVariable int id_almacen, Model model) {
-        Optional<Almacen> almacen = service.listarId(id_almacen);
-        List<Almacen> almacenes = service.listar();
-        model.addAttribute("almacenes", almacenes);
-        model.addAttribute("almacen", almacen.get());
-        return "almacenes";
+     @PostMapping("/saveProveedor")
+    public String saveProveedor(@Valid Proveedor p, Model model) {
+        provService.saveProveedor(p);
+        return "redirect:/proveedores";
     }
 
     @GetMapping("/editarClasificaciones/{id_clasificacion}")
@@ -145,19 +135,22 @@ public class Controlador {
         return "clasificaciones"; 
     }
 
-    @GetMapping("/editarUsuarios/{id_usuario}")
-    public String editarUsuarios(@PathVariable int id_usuario, Model model) {
-        Optional<Usuario> usuario = usuaService.listarId(id_usuario);
-        List<Usuario> usuarios = usuaService.listar();
-        model.addAttribute("usuarios", usuarios);
-        model.addAttribute("usuario", usuario.get());
-        return "usuarios";
-    }    
+    @GetMapping("/editar/{id_almacen}")
+    public String editar(@PathVariable int id_almacen, Model model) {
+        Optional<Almacen> almacen = service.listarId(id_almacen);
+        List<Almacen> almacenes = service.listar();
+        model.addAttribute("almacenes", almacenes);
+        model.addAttribute("almacen", almacen.get());
+        return "almacenes";
+    }
 
-    @GetMapping("/eliminar/{id_almacen}")
-    public String delete(@PathVariable int id_almacen, Model model) {
-        service.delete(id_almacen);
-        return "redirect:/almacenes";
+    @GetMapping("/editarProveedores/{id_proveedor}")
+    public String editarProveedores(@PathVariable int id_proveedor, Model model) {
+        Optional<Proveedor> proveedor = provService.listarId(id_proveedor);
+        List<Proveedor> proveedores = provService.listar();
+        model.addAttribute("proveedores", proveedores);
+        model.addAttribute("proveedor", proveedor.get());
+        return "proveedores";
     }
 
     @GetMapping("/deleteClasificaciones/{id_clasificacion}")
@@ -166,9 +159,17 @@ public class Controlador {
         return "redirect:/clasificaciones";
     }
 
-    @GetMapping("/deleteUsuarios/{id_usuario}")
-    public String deleteUsuarios(@PathVariable int id_usuario, Model model) {
-        usuaService.delete(id_usuario);
-        return "redirect:/usuarios";
-    }  
+    @GetMapping("/eliminar/{id_almacen}")
+    public String delete(@PathVariable int id_almacen, Model model) {
+        service.delete(id_almacen);
+        return "redirect:/almacenes";
+    }
+
+    @GetMapping("/eliminarProveedores/{id_proveedor}")
+    public String deleteProveedor(@PathVariable int id_proveedor, Model model) {
+        provService.deleteProveedor(id_proveedor);
+        return "redirect:/proveedores";
+    }
+
+   
 }
