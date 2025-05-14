@@ -25,8 +25,12 @@ public class AlmacenService implements IalmcenService{
     }
     @Override
     public int Save(Almacen a) {
-        // TODO Auto-generated method stub
-        return 0;
+        int res=0;
+        Almacen almacen=data.save(a);
+        if (!almacen.equals(null)) {
+            res=1;
+        }
+        return res;
     }
     @Override
     public void delete(int id) {

@@ -6,12 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.integrador.interfacesService.IalmcenService;
 import com.example.integrador.interfacesService.IclasificacionService;
 import com.example.integrador.modelo.Almacen;
+<<<<<<< HEAD
 import com.example.integrador.modelo.Clasificacion;
+=======
+import jakarta.validation.Valid;
+
+>>>>>>> d199c8a573a091375650332935e76946d665badd
 
 @Controller
 @RequestMapping
@@ -52,8 +58,10 @@ public class Controlador {
     public String listar(Model model) {
         List<Almacen>almacenes=service.listar();
         model.addAttribute("almacenes", almacenes);
+        model.addAttribute("almacen", new Almacen());
         return "almacenes";
     }
+<<<<<<< HEAD
 
     @GetMapping("/proveedores")
     public String proveedores () {
@@ -88,5 +96,11 @@ public class Controlador {
     @GetMapping("/reportes")
     public String reportes () {
         return "reportes";
+=======
+    @PostMapping("/save") 
+    public String save(@Valid  Almacen a, Model model) {
+        service.Save(a);
+        return "redirect:/almacenes";
+>>>>>>> d199c8a573a091375650332935e76946d665badd
     }
 }
