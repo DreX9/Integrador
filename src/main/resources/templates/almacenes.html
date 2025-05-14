@@ -23,23 +23,25 @@
                         <h5 class="mb-0">Sistema de Almacenes</h5>
                     </header>
                     <div class="card-body">
-                        <form id="almacenesForm">
+                        <form id="almacenesForm" th:action="@{/save}" th:object=${almacen} method="POST">
                             <input type="hidden" id="almacenId">
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="nombreAlmacen" class="form-label">Nombre</label>
-                                    <input type="text" class="form-control" id="nombreAlmacen" name="nombreAlmacen" required>
+                                    <input type="text" class="form-control" id="nombreAlmacen" name="nombreAlmacen" required
+                                    th:field="*{nombre}">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="direccionAlmacen" class="form-label">Dirección</label>
-                                    <input type="text" class="form-control" id="direccionAlmacen" name="direccionAlmacen" required>
+                                    <input type="text" class="form-control" id="direccionAlmacen" name="direccionAlmacen" required
+                                    th:field="*{direccion}">
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-12">
                                     <label for="descripcionAlmacen" class="form-label">Descripción</label>
-                                    <textarea class="form-control" id="descripcionAlmacen" name="descripcionAlmacen" rows="4" style="resize: none;"></textarea>
+                                    <textarea class="form-control" id="descripcionAlmacen" name="descripcionAlmacen" rows="4" style="resize: none;" th:field="*{descripcion}"></textarea>
                                 </div>
                             </div>
 
@@ -62,13 +64,15 @@
                                         <th>ID</th>
                                         <th>Nombre</th>
                                         <th>Direccion</th>
+                                        <th>Descripcion</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                    <tr th:each="almacen:${almacenes}">
-                                        <td th:text = "${almacen.id}"></td>
+                                        <td th:text = "${almacen.id_almacen}"></td>
                                         <td th:text = "${almacen.nombre}"></td>
+                                        <td th:text = "${almacen.direccion}"></td>
                                         <td th:text = "${almacen.descripcion}"></td>
                                         <td>
                                             <a class="btn btn-warning">Editar</a>
