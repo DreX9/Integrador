@@ -24,7 +24,7 @@
                     </header>
                     <div class="card-body">
                         <form id="comprasForm" th:object="${usuario}" th:action="@{/saveUsuario}" method="post">
-                            <input type="hidden" th:field="*{id_usuario}" />
+                            <input type="hidden" th:field="*{id}" />
                             <div class="row mb-3">
                                 <div class="col-md-4">
                                     <label for="nombre" class="form-label">Nombre</label>
@@ -37,9 +37,9 @@
                                         th:field="*{telefono}" required>
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="usuario" class="form-label">Usuario</label>
-                                    <input type="text" class="form-control" id="usuario"
-                                        name="usuario" th:field="*{usuario}" required>
+                                    <label for="user" class="form-label">Usuario</label>
+                                    <input type="text" class="form-control" id="user"
+                                        th:field="*{user}" required>
                                 </div>
                             </div>
 
@@ -104,18 +104,18 @@
                                 </thead>
                                 <tbody>
                                     <tr th:each="usuario:${usuarios}">
-                                        <td th:text="${usuario.id_usuario}"></td>
+                                        <td th:text="${usuario.id}"></td>
                                         <td th:text="${usuario.nombre}"></td>
                                         <td th:text="${usuario.apellido}"></td>
                                         <td th:text="${usuario.correo}"></td>
                                         <td th:text="${usuario.telefono}"></td>
                                         <td th:text="${usuario.dni}"></td>
-                                        <td th:text="${usuario.usuario}"></td>
-                                        <td th:text="${usuario.contraseña}"></td>
                                         <td th:text="${usuario.rol}"></td>
+                                        <td th:text="${usuario.user}"></td>
+                                        <td th:text="${usuario.contraseña}"></td>
                                         <td>
-                                            <a th:href="@{/editarUsuarios/} + ${usuario.id_usuario}" class="btn btn-warning">Editar</a>
-                                            <a th:href="@{/deleteUsuarios/} + ${usuario.id_usuario}"class="btn btn-danger">Eliminar</a>
+                                            <a th:href="@{/editarUsuarios/} + ${usuario.id}" class="btn btn-warning">Editar</a>
+                                            <a th:href="@{/deleteUsuarios/} + ${usuario.id}"class="btn btn-danger">Eliminar</a>
                                         </td>
                                     </tr>
                                 </tbody>

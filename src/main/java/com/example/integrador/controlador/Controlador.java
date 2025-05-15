@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.integrador.interfacesService.IalmcenService;
 import com.example.integrador.interfacesService.IclasificacionService;
 import com.example.integrador.interfacesService.IproveedorService;
+import com.example.integrador.interfacesService.IusuarioService;
 import com.example.integrador.modelo.Almacen;
 import com.example.integrador.modelo.Clasificacion;
 import com.example.integrador.modelo.Proveedor;
+import com.example.integrador.modelo.Usuario;
 
 import jakarta.validation.Valid;
 
@@ -28,28 +31,30 @@ public class Controlador {
     private IalmcenService service;
     @Autowired
     private IclasificacionService clasService;
-     @Autowired
+    @Autowired
     private IproveedorService provService;
+    @Autowired
+    private IusuarioService usuaService;
 
-    // @GetMapping
-    // public String inicio () {
-    // return "index";
-    // }
+    @GetMapping
+    public String inicio () {
+     return "index";
+    }
 
-    // @GetMapping("/compras")
-    // public String compras () {
-    // return "compras";
-    // }
+    @GetMapping("/compras")
+    public String compras () {
+        return "compras";
+    }
 
-    // @GetMapping("/ventas")
-    // public String ventas () {
-    // return "ventas";
-    // }
+    @GetMapping("/ventas")
+    public String ventas () {
+        return "ventas";
+    }
 
-    // @GetMapping("/productos")
-    // public String productos () {
-    // return "productos";
-    // }
+    @GetMapping("/productos")
+    public String productos () {
+        return "productos";
+    }
 
     @GetMapping("/clasificaciones")
     public String clasificaciones(Model model) {
@@ -74,40 +79,38 @@ public class Controlador {
         return "proveedores";
     }
 
-    // @GetMapping("/proveedores")
-    // public String proveedores () {
-    // return "proveedores";
-    // }
+    @GetMapping("/clientes")
+    public String clientes () {
+        return "clientes";
+    }
 
-    // @GetMapping("/clientes")
-    // public String clientes () {
-    // return "clientes";
-    // }
+    @GetMapping("/usuarios")
+    public String usuarios (Model model) {
+        List<Usuario>usuarios = usuaService.listar();
+        model.addAttribute("usuarios", usuarios);
+        model.addAttribute("usuario", new Usuario());
+        return "usuarios";
+    }
 
-    // @GetMapping("/empleados")
-    // public String empleados () {
-    // return "empleados";
-    // }
+    @GetMapping("/devolucion-compra")
+    public String devolucionCompra () {
+        return "devolucion-compra";
+    }
 
-    // @GetMapping("/devolucion-compra")
-    // public String devolucionCompra () {
-    // return "devolucion-compra";
-    // }
+    @GetMapping("/devolucion-venta")
+    public String devolucionVenta () {
+        return "devolucion-venta";
+    }
 
-    // @GetMapping("/devolucion-venta")
-    // public String devolucionVenta () {
-    // return "devolucion-venta";
-    // }
+    @GetMapping("/inventarios")
+    public String inventarios () {
+        return "inventarios";
+    }
 
-    // @GetMapping("/inventarios")
-    // public String inventarios () {
-    // return "inventarios";
-    // }
-
-    // @GetMapping("/reportes")
-    // public String reportes () {
-    // return "reportes";
-    // }
+    @GetMapping("/reportes")
+    public String reportes () {
+    return "reportes";
+    }
 
     @PostMapping("/save")
     public String save(@Valid Almacen a, Model model) {
@@ -124,6 +127,12 @@ public class Controlador {
     public String saveProveedor(@Valid Proveedor p, Model model) {
         provService.saveProveedor(p);
         return "redirect:/proveedores";
+    }
+
+    @PostMapping("/saveUsuario")
+    public String saveUsuario(@ModelAttribute("usuario") Usuario u, Model model) {
+        usuaService.saveUsuario(u);
+        return "redirect:/usuarios";
     }
 
     @GetMapping("/editarClasificaciones/{id_clasificacion}")
@@ -153,6 +162,15 @@ public class Controlador {
         return "proveedores";
     }
 
+    @GetMapping("/editarUsuarios/{id_usuario}")
+    public String editarUsuarios(@PathVariable int id_usuario, Model model) {
+        Optional<Usuario> usuario = usuaService.listarId(id_usuario);
+        List<Usuario> usuarios = usuaService.listar();
+        model.addAttribute("usuarios", usuarios);
+        model.addAttribute("usuario", usuario.get());
+        return "usuarios";
+    } 
+
     @GetMapping("/deleteClasificaciones/{id_clasificacion}")
     public String deleteClasificaciones(@PathVariable int id_clasificacion, Model model) {
         clasService.delete(id_clasificacion);
@@ -170,6 +188,12 @@ public class Controlador {
         provService.deleteProveedor(id_proveedor);
         return "redirect:/proveedores";
     }
+
+    @GetMapping("/deleteUsuarios/{id_usuario}")
+    public String deleteUsuarios(@PathVariable int id_usuario, Model model) {
+        usuaService.deleteUsuario(id_usuario);
+        return "redirect:/usuarios";
+    }  
 
    
 }

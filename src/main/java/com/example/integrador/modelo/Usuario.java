@@ -1,5 +1,6 @@
 package com.example.integrador.modelo;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,39 +12,41 @@ import jakarta.persistence.Table;
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_usuario;
+    @Column(name = "id_usuario")
+    private int id;
     private String nombre;
     private String apellido;
     private String correo;
     private String telefono;
     private String dni;
-    private String usuario;
+    @Column(name = "usuario_nombre")
+    private String user;
     private String contraseña;
     private String rol;
     
     public Usuario() {
     }
 
-    public Usuario(int id_usuario, String nombre, String apellido, String correo, String telefono, String dni, String usuario, String contraseña, String rol) {
-        this.id_usuario = id_usuario;
+    public Usuario(int id, String nombre, String apellido, String correo, String telefono, String dni, String user, String contraseña, String rol) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.telefono = telefono;
         this.dni = dni;
-        this.usuario = usuario;
+        this.user = user;
         this.contraseña = contraseña;
         this.rol = rol;
     }
 
 
 
-    public int getId_usuario() {
-        return id_usuario;
+    public int getId() {
+        return id;
     }
 
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -86,12 +89,12 @@ public class Usuario {
         this.dni = dni;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getUser() {
+        return user;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public String getContraseña() {
