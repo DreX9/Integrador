@@ -25,7 +25,7 @@ public class UsuarioService implements IusuarioService{
     }
 
     @Override
-    public int saveUsuario(Usuario u) {
+    public int save(Usuario u) {
         int res = 0;
         Usuario usuario = data.save(u);
         if (!usuario.equals(null)) {
@@ -35,7 +35,7 @@ public class UsuarioService implements IusuarioService{
     }
 
     @Override
-    public void deleteUsuario(int id) {
+    public void delete(int id) {
         data.deleteById(id);
     }    
 }

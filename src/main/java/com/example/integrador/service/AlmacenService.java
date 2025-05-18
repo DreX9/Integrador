@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.integrador.interfaces.IAlmacen;
-import com.example.integrador.interfacesService.IalmcenService;
+import com.example.integrador.interfacesService.IalmacenService;
 import com.example.integrador.modelo.Almacen;
 
 @Service
-public class AlmacenService implements IalmcenService{
+public class AlmacenService implements IalmacenService{
     @Autowired
     private IAlmacen data;
     @Override
@@ -24,7 +24,7 @@ public class AlmacenService implements IalmcenService{
         return data.findById(id);
     }
     @Override
-    public int Save(Almacen a) {
+    public int save(Almacen a) {
         int res=0;
         Almacen almacen=data.save(a);
         if (!almacen.equals(null)) {

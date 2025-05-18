@@ -23,7 +23,7 @@ public class ProveedorService implements IproveedorService {
         return data.findById(id);
     }
     @Override
-    public int saveProveedor(Proveedor c) {
+    public int save(Proveedor c) {
         int res = 0;
         Proveedor proveedor = data.save(c);
         if (!proveedor.equals(null)) {
@@ -32,7 +32,7 @@ public class ProveedorService implements IproveedorService {
         return res;
     }
     @Override
-    public void deleteProveedor(int id) {
+    public void delete(int id) {
         data.deleteById(id);   
     }
 }

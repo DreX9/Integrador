@@ -8,6 +8,6 @@ import com.example.integrador.modelo.Clasificacion;
 public interface IclasificacionService {
     public List<Clasificacion>listar();
     public Optional<Clasificacion>listarId(int id);
-    public int save (Clasificacion c);
+    public int save(Clasificacion c);
     public void delete(int id);
 }

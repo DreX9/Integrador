@@ -12,9 +12,9 @@ import com.example.integrador.modelo.Clasificacion;
 
 @Service
 public class ClasificacionService implements IclasificacionService{
-
     @Autowired
     private IClasificacion data;
+    
     @Override
     public List<Clasificacion> listar() {
         return (List<Clasificacion>)data.findAll();

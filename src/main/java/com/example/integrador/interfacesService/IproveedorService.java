@@ -8,6 +8,6 @@ import com.example.integrador.modelo.Proveedor;
 public interface IproveedorService {
     public List<Proveedor>listar();
     public Optional<Proveedor>listarId(int id);
-    public int saveProveedor (Proveedor c);
-    public void deleteProveedor(int id);
+    public int save(Proveedor c);
+    public void delete(int id);
 }

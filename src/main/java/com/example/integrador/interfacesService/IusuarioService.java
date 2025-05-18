@@ -8,6 +8,6 @@ import com.example.integrador.modelo.Usuario;
 public interface IusuarioService {
     public List<Usuario>listar();
     public Optional<Usuario>listarId(int id);
-    public int saveUsuario (Usuario u);
-    public void deleteUsuario (int id);
+    public int save(Usuario u);
+    public void delete(int id);
 }

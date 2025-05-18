@@ -58,10 +58,4 @@ public class Clasificacion {
     public void setTipo_clasificacion(String tipo_clasificacion) {
         this.tipo_clasificacion = tipo_clasificacion;
     }
-
-    
-
-
-
-    
 }
