@@ -15,14 +15,17 @@ import com.example.integrador.interfacesService.IalmacenService;
 import com.example.integrador.interfacesService.IclasificacionService;
 import com.example.integrador.interfacesService.IclienteService;
 import com.example.integrador.interfacesService.IproveedorService;
+import com.example.integrador.interfacesService.IrolService;
 import com.example.integrador.interfacesService.IusuarioService;
 import com.example.integrador.modelo.Almacen;
 import com.example.integrador.modelo.Clasificacion;
 import com.example.integrador.modelo.Cliente;
 import com.example.integrador.modelo.Proveedor;
+import com.example.integrador.modelo.Rol;
 import com.example.integrador.modelo.Usuario;
 
 import jakarta.validation.Valid;
+
 
 
 
@@ -39,7 +42,9 @@ public class Controlador {
     @Autowired
     private IusuarioService usuaService;
     @Autowired
-    private IclienteService clieService;    
+    private IclienteService clieService;
+    @Autowired
+    private IrolService rolService;
 
     //ALMACENES
     @GetMapping("/almacenes")
@@ -201,6 +206,36 @@ public class Controlador {
     @GetMapping("/reportes")
     public String reportes () {
     return "reportes";
+    }
+
+    //ROLES
+    @GetMapping("/roles")
+    public String listarRoles(Model model) {
+        List<Rol> roles = rolService.listar();
+        model.addAttribute("roles", roles);
+        model.addAttribute("rol", new Rol());
+        return "roles";
+    }
+
+    @PostMapping("/saveRoles")
+    public String saveRoles(@Valid Rol r, Model model) {
+        rolService.save(r);
+        return "redirect:/roles";
+    }
+
+    @GetMapping("/editarRoles/{id_rol}")
+    public String editarRoles(@PathVariable int id_rol, Model model) {
+        Optional<Rol> rol = rolService.listarId(id_rol);
+        List<Rol> roles = rolService.listar();
+        model.addAttribute("roles", roles);        
+        model.addAttribute("rol", rol.get());
+        return "roles"; 
+    }
+
+    @GetMapping("/deleteRoles/{id_rol}")
+    public String deleteRoles(@PathVariable int id_rol, Model model) {
+        clasService.delete(id_rol);
+        return "redirect:/roles";
     }
 
     //USUARIOS
