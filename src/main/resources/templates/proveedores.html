@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proveedores</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
-</head>
+<head th:replace="~{fragments/template :: head('Proveedores')}"></head>
 
 <body>
     <div class="container-fluid">
@@ -23,57 +16,58 @@
                         <h5 class="mb-0">Sistema de Proveedores</h5>
                     </header>
                     <div class="card-body">
-                        <form id="comprasForm" action="#" method="post">
+                        <form id="comprasForm"  th:action="@{/saveProveedor}" th:object="${proveedor}" method="POST">
+                            <input type="hidden" th:field="*{id_proveedor}" />
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="nombre" class="form-label">Nombre</label>
                                     <input type="text" class="form-control" id="nombre"
-                                        name="nombre">
+                                        name="nombre" required th:field="*{nombre_proveedor}">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="direccion" class="form-label">Dirección</label>
                                     <input type="text" class="form-control" id="direccion"
-                                        name="direccion">
+                                        name="direccion" required th:field="*{direccion}">
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="contacto" class="form-label">Contacto</label>
-                                    <input type="text" class="form-control numeric-only" id="contacto" name="contacto">
+                                    <input type="text" class="form-control " id="contacto" name="contacto" required th:field="*{contacto}">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="ruc" class="form-label">RUC</label>
-                                    <input type="text" class="form-control numeric-only" id="ruc" name="ruc">
+                                    <input type="text" class="form-control numeric-only" id="ruc" name="ruc" required th:field="*{ruc}">
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label for="telefono" class="form-label">Teléfono</label>
-                                    <input type="text" class="form-control numeric-only" id="telefono" name="telefono">
+                                    <input type="text" class="form-control numeric-only" id="telefono" name="telefono" required th:field="*{telefono}">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="matricula" class="form-label">Matricula de Embarcación</label>
-                                    <input type="text" class="form-control numeric-only" id="matricula" name="matricula">
+                                    <input type="text" class="form-control " id="matricula" name="matricula" required th:field="*{matricula_embarcacion}">
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-md-5">
                                     <label for="stockDisponible" class="form-label">Puerto de Origen</label>
-                                    <input type="text" class="form-control" id="stockDisponible">
+                                    <input type="text" class="form-control" id="puertoOrigen" required th:field="*{puerto_origen}">
                                 </div>
                                 <div class="col-md-5">
                                     <label for="tipoProveedor" class="form-label">Tipo de Proveedor</label>
-                                    <select class="form-select" id="tipoProveedor" name="tipoProveedor">
+                                    <select class="form-select" id="tipoProveedor" name="tipoProveedor" required th:field="*{tipo_proveedor}">
                                         <option value="" selected>Seleccionar</option>
                                         <option value="Embarcación">Embarcación</option>
                                         <option value="Empresa">Empresa</option>
                                     </select>
                                 </div>
                                 <div class="col-md-2 d-flex align-items-end justify-content-end">
-                                    <button type="button" class="btn btn-primary" id="btnComprar">Comprar</button>
+                                    <button type="submit" class="btn btn-primary" id="btnComprar">Guardar</button>
                                 </div>
                             </div>
                         </form>
@@ -86,18 +80,34 @@
                             <table class="table table-striped table-hover" id="comprasTable">
                                 <thead class="table-dark">
                                     <tr>
+                                        <th>ID</th>
                                         <th>Nombre</th>
                                         <th>Contacto</th>
-                                        <th>Teléfono</th>
-                                        <th>Puerto de Origen</th>
-                                        <th>Dirección</th>
                                         <th>RUC</th>
+                                        <th>Teléfono</th>
+                                        <th>Dirección</th>
+                                        <th>Puerto de Origen</th>
                                         <th>Matrícula de Embarcación</th>
                                         <th>Tipo de Proveedor</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Los datos se cargarán dinámicamente -->
+                                    <tr th:each="proveedor:${proveedores}">
+                                        <td th:text = "${proveedor.id_proveedor}"></td>
+                                        <td th:text = "${proveedor.nombre_proveedor}"></td>
+                                        <td th:text = "${proveedor.contacto}"></td>
+                                        <td th:text = "${proveedor.ruc}"></td>
+                                        <td th:text = "${proveedor.telefono}"></td>
+                                        <td th:text = "${proveedor.direccion}"></td>
+                                        <td th:text = "${proveedor.puerto_origen}"></td>
+                                        <td th:text = "${proveedor.matricula_embarcacion}"></td>
+                                        <td th:text = "${proveedor.tipo_proveedor}"></td>
+                                        <td>
+                                            <a th:href="@{/editarProveedores/}+${proveedor.id_proveedor}" class="btn btn-warning">Editar</a>
+                                            <a th:href="@{/eliminarProveedores/}+${proveedor.id_proveedor}" class="btn btn-danger">Eliminar</a>
+                                        </td>
+                                    </tr> 
                                 </tbody>
                             </table>
                         </div>
