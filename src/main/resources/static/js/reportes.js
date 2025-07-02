@@ -3,7 +3,7 @@ const pieCtx = document.getElementById('pieChart').getContext('2d');
 const pieChart = new Chart(pieCtx, {
     type: 'pie',
     data: {
-        labels: ['Electrónicos', 'Muebles', 'Ropa', 'Alimentos'],
+        labels: ['Trucha', 'Jurel', 'Anchoveta', 'Atún'],
         datasets: [{
             label: 'Ventas por Categoría',
             data: [35, 25, 20, 20],
